@@ -34,10 +34,10 @@ public class Level {
 	
 	public void tick() {
 		if (game.input.left.down) {
-			if((getTile(game.player.x, game.player.y) == null))
+			if((getTile(game.player.x - 5, game.player.y) == null))
 				xScroll -= 5;
 		} else if (game.input.right.down) {
-			if((getTile(game.player.x + 5, game.player.y) == null))
+			if((getTile(game.player.x + game.player.size + 5, game.player.y) == null))
 				xScroll += 5;
 			
 

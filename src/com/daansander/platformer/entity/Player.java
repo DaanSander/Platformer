@@ -7,10 +7,11 @@ import com.daansander.platformer.tile.Tile;
 
 public class Player extends Entity {
 
+	//TODO: Make size final
+	public int size = 10;
 	private Level level;
 	private int yVelocity = 0;
 	private boolean grounded = false;
-	private int size = 20;
 	private InputHandler input;
 
 	public Player(int x, int y, Level level, InputHandler input) {
@@ -21,21 +22,25 @@ public class Player extends Entity {
 
 	@Override
 	public void tick() {
-		grounded = hasCollided(x + size, y + size - yVelocity);
+		grounded = hasCollided(x, y + size + yVelocity) || hasCollided(x + size, y + size + yVelocity);
+
+		if(hasCollided(x, y) || hasCollided (x + size, y)) {
+			yVelocity = 0;
+			return;
+		}
 		
 		if (grounded)
 			yVelocity = 0;
 		else
-			yVelocity -= 1;
+			yVelocity += 1;
 
-		if(input.up.down && grounded) {
-			yVelocity += 10;
+		if (input.up.down && grounded) {
+			yVelocity -= 10;
 		}
-		
-		if(yVelocity < -10) 
-			yVelocity = -10;
-		
-		y -= yVelocity;
+
+		if (yVelocity > 10) yVelocity = 10;
+
+		y += yVelocity;
 
 	}
 
@@ -46,6 +51,8 @@ public class Player extends Entity {
 	@Override
 	public void render(Screen screen) {
 		screen.fillRectangle(x, y, size, size, 0xff000f);
+		screen.fillRectangle(x, y, 1, 1, 0xffffff);
+
 	}
 
 }
