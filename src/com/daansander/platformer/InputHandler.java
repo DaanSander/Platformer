@@ -37,6 +37,8 @@ public class InputHandler implements KeyListener {
 	public Key down = new Key();
 	public Key left = new Key();
 	public Key right = new Key();
+	public Key shift = new Key();
+	public Key f2 = new Key();
 	public Key r = new Key();
 	
 	public InputHandler(Game game) {
@@ -58,6 +60,8 @@ public class InputHandler implements KeyListener {
 		if(key == KeyEvent.VK_DOWN) down.toggle(pressed);
 		if(key == KeyEvent.VK_RIGHT) right.toggle(pressed);
 		if(key == KeyEvent.VK_LEFT) left.toggle(pressed);
+		if(key == KeyEvent.VK_SHIFT) shift.toggle(pressed);
+		if(key == KeyEvent.VK_F2) f2.toggle(pressed);
 		if(key == KeyEvent.VK_R) r.toggle(pressed);
 		
 	}
